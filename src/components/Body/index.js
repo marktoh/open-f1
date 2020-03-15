@@ -24,12 +24,12 @@ class Body extends React.Component<Props> {
 
 	componentDidUpdate = (prevProps, prevState) => {
 		if (prevState.year !== this.state.year) {
-			axios.get(`http://ergast.com/api/f1/${this.state.year}.json`).then(resp => this.setState({ data: resp.data }));
+			axios.get(`https://ergast.com/api/f1/${this.state.year}.json`).then(resp => this.setState({ data: resp.data }));
 		}
 	}
 
 	componentDidMount = () => {
-		axios.get(`http://ergast.com/api/f1/${this.state.year}.json`).then(resp => this.setState({ data: resp.data }));
+		axios.get(`https://ergast.com/api/f1/${this.state.year}.json`).then(resp => this.setState({ data: resp.data }));
 	}
 
 	onSelect = (e) => {
