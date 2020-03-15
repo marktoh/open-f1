@@ -24,7 +24,7 @@ class RacingMap extends React.Component<Props> {
 		this.state = {
 		  lat: this.props.lat,
 		  lng: this.props.long,
-		  zoom: 12.8
+		  zoom: 6,
 		}
 	  }
 
