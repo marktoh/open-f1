@@ -32,7 +32,6 @@ class VisualItem extends React.Component<Props> {
 			<div className="VisualItem">
 				<div className="VisualItem-Header">
 					<div className="VisualItem-Header-Left">
-						<div className="RaceInfo-Primary">SEASON {season}</div>
 						<div className="RaceInfo-Secondary">
 							<div className="RaceInfo-Secondary-Content">
 								<div className="RaceInfo-Secondary-RaceName">{raceName}</div>
