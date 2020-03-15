@@ -1,0 +1,42 @@
+.Footer {
+	height: 200px;
+	border-top: 1px solid #cecece;
+	background: #2e2f3f;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	color: #f8f8f8;
+
+	.Footer-Left{
+		display: flex;
+		align-items: flex-end;
+		font-variant: all-petite-caps;
+
+		.Footer-Insignia {
+			font-size: 12px;
+			padding: 25px;
+		}
+	}
+
+	.Footer-Right {
+		display: flex;
+		align-items: flex-end;
+		.Footer-SocialMedia {
+			display: flex;
+			flex-direction: row;
+			padding: 15px 20px;
+
+			* {
+				height: 32px;
+				width: 32px;
+				padding: 10px;
+
+				&:hover {
+					opacity: 0.9;
+					cursor: pointer;
+				}
+			}
+		}
+	}
+
+}

@@ -1,0 +1,17 @@
+.Header {
+	background: #2e2f3f;
+	color: #f8f8f8;
+	padding: 40px;
+	.Header-Title {
+		padding: 5px;
+		font-size: 32px;
+		letter-spacing: 2px;
+	}
+	
+	.Header-Description {
+		padding-top: 10px;
+		font-size: 13px;
+		letter-spacing: 2px;
+		font-variant: all-petite-caps;
+	}
+}
