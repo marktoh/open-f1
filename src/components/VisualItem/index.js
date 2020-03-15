@@ -27,7 +27,7 @@ class VisualItem extends React.Component<Props> {
 	}
 
 	render() {
-		const { season, raceName, raceUrl, round, locality, country, circuitName, circuitUrl, lat, long, date, time } = this.props;
+		const { raceName, raceUrl, round, locality, country, circuitName, circuitUrl, lat, long, date, time } = this.props;
 		return (
 			<div className="VisualItem">
 				<div className="VisualItem-Header">
