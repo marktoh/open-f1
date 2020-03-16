@@ -123,7 +123,7 @@ class Body extends React.Component<Props> {
       <div className="Body-Body-Row">
         <div className="Map-Overview">
           <div className="Map-Overview-Body">
-            <Map lat={37} long={144} markers={markers} />
+            <Map markers={markers} />
           </div>
         </div>
       </div>
