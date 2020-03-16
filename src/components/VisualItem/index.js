@@ -1,5 +1,4 @@
 import React from 'react';
-import moment from 'moment';
 import { FaExternalLinkAlt as RedirectIcon} from 'react-icons/fa'
 
 import { getFormattedTime } from '../../utils/time'

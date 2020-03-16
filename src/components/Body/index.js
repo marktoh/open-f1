@@ -57,14 +57,11 @@ class Body extends React.Component<Props> {
     const { Races } = this.state.data.MRData.RaceTable;
     const markers = Races.map(race => {
       const {
-        season,
         round,
-        url: raceUrl,
         raceName,
         date,
         time,
         Circuit: {
-          url: circuitUrl,
           circuitName,
           Location: { lat, long, locality, country }
         }
