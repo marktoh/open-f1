@@ -1,6 +1,8 @@
 import React from 'react';
-import { FaExternalLinkAlt as RedirectIcon} from 'react-icons/fa'
 import moment from 'moment';
+import { FaExternalLinkAlt as RedirectIcon} from 'react-icons/fa'
+
+import { getFormattedTime } from '../../utils/time'
 
 import Map from '../Map';
 
@@ -21,10 +23,6 @@ type Props = {
 	time: string,
 };
 class VisualItem extends React.Component<Props> {
-	getTime = (date, time) => {
-		if (date && time) return moment(`${date}T${time}`).format("LLLL");
-		else if (!time) return moment(date).format("LL");
-	}
 
 	render() {
 		const { raceName, raceUrl, round, locality, country, circuitName, circuitUrl, lat, long, date, time } = this.props;
@@ -52,7 +50,7 @@ class VisualItem extends React.Component<Props> {
 						</div>
 						<div className="RaceInfo-Quarternary">
 							<div className="RaceInfo-Tertiary-Temporal">
-								{this.getTime(date, time)}
+								{getFormattedTime(date, time)}
 							</div>
 						</div>
 					</div>
@@ -64,7 +62,24 @@ class VisualItem extends React.Component<Props> {
 					<div className="VisualItem-Body-Object">
 						<div className="VisualItem-Body-Object-Header"></div>
 						<div className="VisualItem-Body-Object-Body">
-							<Map lat={lat} long={long} content={circuitName}/>
+							<Map lat={lat} long={long} markers={
+								[
+									{ 
+										lat,
+										long, 
+										popup: { content: <div>
+											<div style={{ fontVariant: 'all-petite-caps', fontSize: 12, color: '#4e5a5f', textDecoration: 'underline' }}>Round {round}</div>
+											<div style={{ fontVariant: 'all-petite-caps', fontSize: 18, color: '#4e5a5f', fontWeight: 600, letterSpacing: 1, padding: 10 }}>{raceName}</div>
+											<div style={{ fontSize: 12, color: '#4e5a5f', textAlign: "right"}}>{circuitName}</div>
+											<div style={{ fontSize: 10, color: '#4e5a5f', textAlign: "right"}}>{locality}, {country}</div>
+											<div style={{ fontSize: 10, color: '#4e5a5f', textAlign: "right"}}>{getFormattedTime(date, time)}</div>
+											</div>, 
+											autoOpen: true,
+										} 
+									}
+								]
+							  } 
+							/>
 						</div>
 						<div className="VisualItem-Body-Object-Footer">
 							<a className="VisualItem-Body-Object-Footer-CircuitName" href={circuitUrl} target="_blank" rel="noopener noreferrer">{circuitName}</a>	
