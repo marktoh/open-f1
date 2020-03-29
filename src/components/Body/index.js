@@ -9,13 +9,14 @@ import { getFormattedTime } from "../../utils/time";
 
 import "./index.scss";
 
+const DEFAULT_ROUND = 1;
 class Body extends React.Component<Props> {
   constructor(props) {
     super(props);
 
     this.state = {
       year: new Date().getFullYear(),
-      round: 1,
+      round: DEFAULT_ROUND,
       data: [],
       showRaces: false
     };
@@ -43,7 +44,8 @@ class Body extends React.Component<Props> {
 
   onSelect = e => {
     this.setState({
-      year: e.value
+      year: e.value,
+      round: DEFAULT_ROUND,
     });
   };
 
