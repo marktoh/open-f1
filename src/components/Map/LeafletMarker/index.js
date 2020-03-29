@@ -6,7 +6,7 @@ type Props = {
 	long: number,
 	popup: {
 		content: string,
-		autoOpen: boolean,
+		open: boolean,
 	},
 	tooltip: {
 		content: string,
@@ -18,9 +18,17 @@ class LeafletMarker extends React.Component<Props> {
 		super(props);
 		this.markerRef = React.createRef();
 	}
+	
+	componentDidUpdate = () => {
+		if (this.props.popup.open) {
+			setTimeout(() =>
+				this.markerRef.current.leafletElement.openPopup()
+			, 250);
+		}
+	}
 
 	componentDidMount = () => {
-		if (this.props.popup && this.props.popup.autoOpen) this.markerRef.current.leafletElement.openPopup();
+		if (this.props.popup && (this.props.popup.open)) this.markerRef.current.leafletElement.openPopup();
 	}
 
 	render() {

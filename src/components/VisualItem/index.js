@@ -1,4 +1,5 @@
 import React from 'react';
+import { isBrowser } from 'react-device-detect';
 import { FaExternalLinkAlt as RedirectIcon} from 'react-icons/fa'
 
 import { getFormattedTime } from '../../utils/time'
@@ -73,7 +74,7 @@ class VisualItem extends React.Component<Props> {
 											<div style={{ fontSize: 10, color: '#4e5a5f', textAlign: "right"}}>{locality}, {country}</div>
 											<div style={{ fontSize: 10, color: '#4e5a5f', textAlign: "right"}}>{getFormattedTime(date, time)}</div>
 											</div>, 
-											autoOpen: true,
+											autoOpen: isBrowser,
 										} 
 									}
 								]

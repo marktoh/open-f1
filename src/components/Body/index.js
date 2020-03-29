@@ -4,6 +4,7 @@ import axios from "axios";
 import Select from "react-select";
 import VisualItem from "../VisualItem";
 import Map from "../Map";
+import Table from '../Table';
 
 import { getFormattedTime } from "../../utils/time";
 
@@ -14,7 +15,8 @@ class Body extends React.Component<Props> {
     super(props);
 
     this.state = {
-      year: 2019,
+      year: new Date().getFullYear(),
+      round: 1,
       data: [],
       showRaces: false
     };
@@ -50,6 +52,53 @@ class Body extends React.Component<Props> {
     this.setState({
       showRaces: !this.state.showRaces
     });
+
+  onRowClick = (round) => this.setState({ round });
+
+  renderTable = () => {
+    if (this.state.data.length <= 0) return null;
+    const { Races } = this.state.data.MRData.RaceTable;
+
+    const data = Races.map(race => {
+      const {
+        round,
+        raceName,
+      } = race;
+
+      return ({
+        round, raceName
+      })
+    });
+
+    const resource = {
+      schema: {
+        fields: [
+          {
+            name: "round",
+            type: "string",
+          },
+          {
+            name: "raceName",
+            type: "string"
+          },
+        ],
+      },
+      data: data,
+    }
+
+    return <Table resource={resource} onRowClick={this.onRowClick} />
+  }
+
+  getLatLng = () => {
+    const { Races } = this.state.data.MRData.RaceTable;
+    const { Location } = Races[this.state.round - 1].Circuit;
+    const { lat, long } = Location;
+
+    return {
+      lat,
+      long
+    }
+  }
 
   renderMap = () => {
     if (this.state.data.length <= 0)
@@ -112,89 +161,42 @@ class Body extends React.Component<Props> {
               </div>
             </div>
           ),
-          autoOpen: round === "1" ? true : false
+          open: `${this.state.round}` === round,
         },
-        tooltip: {
-          content: `Round ${round}`
-        }
       };
     });
     return (
-      <div className="Body-Body-Row">
-        <div className="Map-Overview">
-          <div className="Map-Overview-Body">
-            <Map markers={markers} />
-          </div>
+      <div className="Map-Overview">
+        <div className="Map-Overview-Body">
+          <Map {...this.getLatLng()} markers={markers} zoom={6} />
         </div>
       </div>
     );
   };
 
-  renderItems = () => {
-    if (this.state.data.length <= 0)
-      return <div className="Body-Placeholder"></div>;
-    const { Races } = this.state.data.MRData.RaceTable;
-
-    return Races.map(race => {
-      const {
-        season,
-        round,
-        url: raceUrl,
-        raceName,
-        date,
-        time,
-        Circuit: {
-          url: circuitUrl,
-          circuitName,
-          Location: { lat, long, locality, country }
-        }
-      } = race;
-      return (
-        <div className="Body-Body-Row" key={round}>
-          <VisualItem
-            season={season}
-            round={round}
-            raceName={raceName}
-            raceUrl={raceUrl}
-            circuitName={circuitName}
-            circuitUrl={circuitUrl}
-            lat={lat}
-            long={long}
-            locality={locality}
-            country={country}
-            date={date}
-            time={time}
-          />
-        </div>
-      );
-    });
-  };
-
   render() {
     return (
       <div className="Body">
-        <div className="Body-Header">
-          <div className="Search">
-            <div className="Search-Title">Currently showing results for</div>
-            <Select
-              className="Search-Dropdown"
-              value={{ label: this.state.year, value: this.state.year }}
-              options={this.options}
-              onChange={this.onSelect}
-              placeholder="Select a year"
-              maxMenuHeight={210}
-              menuPlacement="auto"
-            />
-          </div>
-        </div>
         <div className="Body-Body">
-          {this.renderMap()}
-          {this.state.showRaces && this.renderItems()}
-          <div className="ShowRaces">
-            <button className="ShowRaces-Button" onClick={this.handleShowClick}>
-              {this.state.showRaces ? "Hide" : "Show"} Races
-            </button>
+          <div className="Body-Body-Column">
+            {this.renderMap()}
           </div>
+          <div className="Body-Body-Column">
+            <div className="Sidebar">
+              <div className="Search">
+                  <Select
+                    className="Search-Dropdown"
+                    value={{ label: this.state.year, value: this.state.year }}
+                    options={this.options}
+                    onChange={this.onSelect}
+                    placeholder="Select a year"
+                    maxMenuHeight={300}
+                    menuPlacement="auto"
+                  />
+                </div>
+                {this.renderTable()}
+              </div>
+            </div>
         </div>
       </div>
     );

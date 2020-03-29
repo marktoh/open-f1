@@ -12,6 +12,7 @@
     "moment": "^2.24.0",
     "node-sass": "^4.13.1",
     "react": "^16.13.0",
+    "react-device-detect": "^1.11.14",
     "react-dom": "^16.13.0",
     "react-icons": "^3.9.0",
     "react-leaflet": "^2.6.3",
