@@ -1,6 +1,21 @@
-## Open Formula 1
-Open Formula 1 is a tool for tracking circuits across Formula 1 seasons.
+# Open Formula 1
 
-Live Demo: https://marktoh.github.io/open-f1/
+A tool for tracking circuits across Formula 1 seasons
 
-Source API: http://ergast.com/mrd/
+## Table of Contents
+
+- 🖥️ [Development](#development)
+
+## Development
+
+### Scripts
+
+| Script          | Description                |
+| --------------- | -------------------------- |
+| `npm run start` | Starts the app in dev mode |
+
+### API
+
+| API                    | Description    |
+| ---------------------- | -------------- |
+| http://ergast.com/mrd/ | Formula 1 Data |
