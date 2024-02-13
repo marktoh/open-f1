@@ -1,6 +1,6 @@
 # Open Formula 1
 
-A tool for tracking circuits across Formula 1 seasons
+A tool to track F1 circuits since 1950 built with React and OpenStreetMap
 
 ## Table of Contents
 
